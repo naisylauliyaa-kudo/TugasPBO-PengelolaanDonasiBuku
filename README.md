@@ -5,9 +5,12 @@ Kelas: B
 NIM: 2509116078
 
 ## 1. Deskripsi Singkat Program 
-Sistem Inventaris Laboratorium adalah program sederhana berbasis Java yang digunakan untuk mengelola data alat dan mencatat peminjaman serta pengembalian alat di laboratorium, seperti mikroskop, tabung reaksi, dan alat praktikum lainnya. Setiap alat memiliki tiga informasi utama, yaitu ID alat, nama alat, dan jumlah alat. Program ini menggunakan *package* yang terpisah agar kode lebih teratur.
-Program memiliki enam menu utama, yaitu Tambah Data Alat, Lihat Data Alat, Ubah Data Alat, Hapus Data Alat, Peminjaman dan Pengembalian, serta Keluar. Pengguna dapat menambah, melihat, mengubah, dan menghapus data alat. Pengguna juga dapat mencatat peminjaman dan pengembalian berdasarkan ID alat yang sudah terdaftar.
-Program ini menerapkan konsep Pemrograman Berorientasi Objek (PBO) dan menggunakan *ArrayList* untuk menyimpan data selama program berjalan. Validasi input digunakan untuk mencegah data yang tidak sesuai, seperti jumlah alat yang negatif atau nama alat yang kosong. Data yang dimasukkan hanya bersifat sementara dan akan hilang ketika program ditutup.
+Sistem Pengelolaan Donasi Buku adalah program sederhana berbasis Java yang digunakan untuk mengelola data donatur, penerima, buku, serta pencatatan donasi buku. Program ini membantu pengguna dalam menambahkan dan melihat data donatur, penerima, dan buku yang tersimpan di dalam sistem. Program juga digunakan untuk mencatat transaksi donasi yang dilakukan oleh donatur.
+
+Program memiliki enam menu utama, yaitu **Kelola Data Donatur, Kelola Data Penerima, Kelola Data Buku, Catat Donasi, Lihat Data Donasi, dan Keluar**. Pada menu donatur dan penerima, pengguna dapat menambah dan melihat data yang sudah tersimpan. Pada menu buku, pengguna dapat menambah dan melihat data buku. Sementara itu, menu Catat Donasi digunakan untuk mencatat transaksi berdasarkan donatur, buku, jumlah buku, dan tanggal donasi.
+
+Program ini menerapkan konsep **Pemrograman Berorientasi Objek (PBO)** dan menggunakan *ArrayList* untuk menyimpan data selama program berjalan. Validasi input juga diterapkan untuk memastikan data yang dimasukkan sesuai dengan ketentuan, seperti mencegah data kosong atau input dengan format yang tidak sesuai. Data yang digunakan dalam program bersifat sementara dan akan hilang ketika program ditutup.
+
 
 ---
 ## 2. Tujuan Program
