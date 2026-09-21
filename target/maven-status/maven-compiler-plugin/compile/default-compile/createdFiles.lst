@@ -1,0 +1,6 @@
+model\Penerima.class
+model\Pengguna.class
+model\Buku.class
+model\Donasi.class
+com\mycompany\pengeloladonasibuku\PengelolaDonasiBuku.class
+model\Donatur.class
