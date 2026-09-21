@@ -17,8 +17,63 @@ public class PengelolaDonasiBuku {
     static ArrayList<Buku> daftarBuku = new ArrayList<>();
     static ArrayList<Donasi> daftarDonasi = new ArrayList<>();
 
-    public static void main(String[] args) {
+    // --- FUNGSI VALIDASI INPUT ---
 
+    // 1. Validasi untuk input berupa Angka (Integer) agar tidak crash jika diisi huruf
+    public static int inputAngka(String pesan) {
+        int hasil = 0;
+        boolean valid = false;
+        while (!valid) {
+            System.out.print(pesan);
+            if (input.hasNextInt()) {
+                hasil = input.nextInt();
+                valid = true;
+            } else {
+                System.out.println(" Input harus berupa angka. Silakan coba lagi.");
+            }
+            input.nextLine(); // membersihkan buffer
+        }
+        return hasil;
+    }
+
+    // 2. Validasi untuk input Teks (String) agar tidak boleh kosong
+    public static String inputTeks(String pesan) {
+        String hasil = "";
+        boolean valid = false;
+        while (!valid) {
+            System.out.print(pesan);
+            hasil = input.nextLine().trim();
+            if (hasil.isEmpty()) {
+                System.out.println(" Input tidak boleh kosong. Silakan coba lagi.");
+            } else {
+                valid = true;
+            }
+        }
+        return hasil;
+    }
+
+    // 3. Validasi khusus untuk No. Telepon (hanya boleh angka dan simbol nomor)
+    public static String inputNoTelepon(String pesan) {
+        String hasil = "";
+        boolean valid = false;
+        while (!valid) {
+            System.out.print(pesan);
+            hasil = input.nextLine().trim();
+            
+            if (hasil.isEmpty()) {
+                System.out.println("❌ Nomor telepon tidak boleh kosong");
+            } else if (!hasil.matches("^[0-9+\\-\\s()]+$")) {
+                System.out.println("❌ Nomor telepon hanya boleh berisi angka dan simbol nomor. Silakan coba lagi.");
+            } else {
+                valid = true;
+            }
+        }
+        return hasil;
+    }
+
+    // -----------------------------
+
+    public static void main(String[] args) {
         int pilihan;
 
         do {
@@ -32,36 +87,28 @@ public class PengelolaDonasiBuku {
             System.out.println("5. Lihat Data Donasi");
             System.out.println("6. Keluar");
             System.out.println("========================================");
-            System.out.print("Pilih menu: ");
-
-            pilihan = input.nextInt();
-            input.nextLine();
+            
+            pilihan = inputAngka("Pilih menu: ");
 
             switch (pilihan) {
                 case 1:
                     menuDonatur();
                     break;
-
                 case 2:
                     menuPenerima();
                     break;
-
                 case 3:
                     menuBuku();
                     break;
-
                 case 4:
                     tambahDonasi();
                     break;
-
                 case 5:
                     tampilkanDonasi();
                     break;
-
                 case 6:
                     System.out.println("\nTerima kasih telah menggunakan sistem.");
                     break;
-
                 default:
                     System.out.println("\nPilihan tidak tersedia!");
             }
@@ -72,7 +119,6 @@ public class PengelolaDonasiBuku {
     // MENU DONATUR
 
     public static void menuDonatur() {
-
         int pilihan;
 
         do {
@@ -80,23 +126,18 @@ public class PengelolaDonasiBuku {
             System.out.println("1. Tambah Donatur");
             System.out.println("2. Lihat Donatur");
             System.out.println("3. Kembali");
-            System.out.print("Pilih menu: ");
-
-            pilihan = input.nextInt();
-            input.nextLine();
+            
+            pilihan = inputAngka("Pilih menu: ");
 
             switch (pilihan) {
                 case 1:
                     tambahDonatur();
                     break;
-
                 case 2:
                     tampilkanDonatur();
                     break;
-
                 case 3:
                     break;
-
                 default:
                     System.out.println("Pilihan tidak tersedia!");
             }
@@ -105,31 +146,20 @@ public class PengelolaDonasiBuku {
     }
 
     public static void tambahDonatur() {
-
         System.out.println("\n ^-^ ========== TAMBAH DONATUR ========== ^-^");
 
-        System.out.print("ID Donatur   : ");
-        int id = input.nextInt();
-        input.nextLine();
-
-        System.out.print("Nama         : ");
-        String nama = input.nextLine();
-
-        System.out.print("No. Telepon  : ");
-        String noTelepon = input.nextLine();
-
-        System.out.print("Alamat       : ");
-        String alamat = input.nextLine();
+        int id = inputAngka("ID Donatur    : ");
+        String nama = inputTeks("Nama          : ");
+        String noTelepon = inputNoTelepon("No. Telepon   : "); // Sudah pakai validasi khusus angka/simbol telepon
+        String alamat = inputTeks("Alamat        : ");
 
         Donatur donatur = new Donatur(id, nama, noTelepon, alamat);
-
         daftarDonatur.add(donatur);
 
         System.out.println("\nData donatur berhasil ditambahkan!");
     }
 
     public static void tampilkanDonatur() {
-
         System.out.println("\n ^-^ ========== DATA DONATUR ========== ^-^");
 
         if (daftarDonatur.isEmpty()) {
@@ -146,7 +176,6 @@ public class PengelolaDonasiBuku {
     // MENU PENERIMA
 
     public static void menuPenerima() {
-
         int pilihan;
 
         do {
@@ -154,24 +183,18 @@ public class PengelolaDonasiBuku {
             System.out.println("1. Tambah Penerima");
             System.out.println("2. Lihat Penerima");
             System.out.println("3. Kembali");
-            System.out.print("Pilih menu: ");
-
-            pilihan = input.nextInt();
-            input.nextLine();
+            
+            pilihan = inputAngka("Pilih menu: ");
 
             switch (pilihan) {
-
                 case 1:
                     tambahPenerima();
                     break;
-
                 case 2:
                     tampilkanPenerima();
                     break;
-
                 case 3:
                     break;
-
                 default:
                     System.out.println("Pilihan tidak tersedia!");
             }
@@ -180,36 +203,20 @@ public class PengelolaDonasiBuku {
     }
 
     public static void tambahPenerima() {
-
         System.out.println("\n ^-^ ========== TAMBAH PENERIMA ========== ^-^");
 
-        System.out.print("ID Penerima       : ");
-        int id = input.nextInt();
-        input.nextLine();
+        int id = inputAngka("ID Penerima       : ");
+        String nama = inputTeks("Nama              : ");
+        String noTelepon = inputNoTelepon("No. Telepon       : "); // Sudah pakai validasi khusus angka/simbol telepon
+        String kebutuhan = inputTeks("Kebutuhan Buku    : ");
 
-        System.out.print("Nama              : ");
-        String nama = input.nextLine();
-
-        System.out.print("No. Telepon       : ");
-        String noTelepon = input.nextLine();
-
-        System.out.print("Kebutuhan Buku    : ");
-        String kebutuhan = input.nextLine();
-
-        Penerima penerima = new Penerima(
-                id,
-                nama,
-                noTelepon,
-                kebutuhan
-        );
-
+        Penerima penerima = new Penerima(id, nama, noTelepon, kebutuhan);
         daftarPenerima.add(penerima);
 
         System.out.println("\nData penerima berhasil ditambahkan!");
     }
 
     public static void tampilkanPenerima() {
-
         System.out.println("\n ^-^ ========== DATA PENERIMA ========== ^-^");
 
         if (daftarPenerima.isEmpty()) {
@@ -226,7 +233,6 @@ public class PengelolaDonasiBuku {
     // MENU BUKU
 
     public static void menuBuku() {
-
         int pilihan;
 
         do {
@@ -234,24 +240,18 @@ public class PengelolaDonasiBuku {
             System.out.println("1. Tambah Buku");
             System.out.println("2. Lihat Buku");
             System.out.println("3. Kembali");
-            System.out.print("Pilih menu: ");
-
-            pilihan = input.nextInt();
-            input.nextLine();
+            
+            pilihan = inputAngka("Pilih menu: ");
 
             switch (pilihan) {
-
                 case 1:
                     tambahBuku();
                     break;
-
                 case 2:
                     tampilkanBuku();
                     break;
-
                 case 3:
                     break;
-
                 default:
                     System.out.println("Pilihan tidak tersedia!");
             }
@@ -260,41 +260,22 @@ public class PengelolaDonasiBuku {
     }
 
     public static void tambahBuku() {
-
         System.out.println("\n ^-^ ========== TAMBAH BUKU ========== ^-^");
 
-        System.out.print("ID Buku      : ");
-        int id = input.nextInt();
-        input.nextLine();
+        int id = inputAngka("ID Buku      : ");
+        String judul = inputTeks("Judul        : ");
+        String penulis = inputTeks("Penulis      : ");
+        String kategori = inputTeks("Kategori     : ");
+        String kondisi = inputTeks("Kondisi      : ");
 
-        System.out.print("Judul        : ");
-        String judul = input.nextLine();
-
-        System.out.print("Penulis      : ");
-        String penulis = input.nextLine();
-
-        System.out.print("Kategori     : ");
-        String kategori = input.nextLine();
-
-        System.out.print("Kondisi      : ");
-        String kondisi = input.nextLine();
-
-        Buku buku = new Buku(
-                id,
-                judul,
-                penulis,
-                kategori,
-                kondisi
-        );
-
+        Buku buku = new Buku(id, judul, penulis, kategori, kondisi);
         daftarBuku.add(buku);
 
         System.out.println("\nData buku berhasil ditambahkan!");
     }
 
     public static void tampilkanBuku() {
-
-        System.out.println("\n ^-^ ========== DATA BUKU ==========^-^");
+        System.out.println("\n ^-^ ========== DATA BUKU ========== ^-^");
 
         if (daftarBuku.isEmpty()) {
             System.out.println("Belum ada data buku.");
@@ -310,7 +291,6 @@ public class PengelolaDonasiBuku {
     // MENU DONASI
 
     public static void tambahDonasi() {
-
         System.out.println("\n ^-^ ========== CATAT DONASI ========== ^-^");
 
         if (daftarDonatur.isEmpty()) {
@@ -323,22 +303,14 @@ public class PengelolaDonasiBuku {
             return;
         }
 
-        System.out.print("ID Donasi      : ");
-        int idDonasi = input.nextInt();
+        int idDonasi = inputAngka("ID Donasi      : ");
 
         System.out.println("\n--- Pilih Donatur ---");
-
         for (Donatur donatur : daftarDonatur) {
-            System.out.println(
-                    donatur.getIdPengguna()
-                    + ". "
-                    + donatur.getNama()
-            );
+            System.out.println(donatur.getIdPengguna() + ". " + donatur.getNama());
         }
 
-        System.out.print("Masukkan ID Donatur: ");
-        int idDonatur = input.nextInt();
-
+        int idDonatur = inputAngka("Masukkan ID Donatur: ");
         Donatur donaturDipilih = null;
 
         for (Donatur donatur : daftarDonatur) {
@@ -354,19 +326,11 @@ public class PengelolaDonasiBuku {
         }
 
         System.out.println("\n--- Pilih Buku ---");
-
         for (Buku buku : daftarBuku) {
-            System.out.println(
-                    buku.getIdBuku()
-                    + ". "
-                    + buku.getJudul()
-            );
+            System.out.println(buku.getIdBuku() + ". " + buku.getJudul());
         }
 
-        System.out.print("Masukkan ID Buku: ");
-        int idBuku = input.nextInt();
-        input.nextLine();
-
+        int idBuku = inputAngka("Masukkan ID Buku: ");
         Buku bukuDipilih = null;
 
         for (Buku buku : daftarBuku) {
@@ -381,28 +345,16 @@ public class PengelolaDonasiBuku {
             return;
         }
 
-        System.out.print("Jumlah Buku   : ");
-        int jumlah = input.nextInt();
-        input.nextLine();
+        int jumlah = inputAngka("Jumlah Buku   : ");
+        String tanggal = inputTeks("Tanggal Donasi: ");
 
-        System.out.print("Tanggal Donasi: ");
-        String tanggal = input.nextLine();
-
-        Donasi donasi = new Donasi(
-                idDonasi,
-                donaturDipilih,
-                bukuDipilih,
-                jumlah,
-                tanggal
-        );
-
+        Donasi donasi = new Donasi(idDonasi, donaturDipilih, bukuDipilih, jumlah, tanggal);
         daftarDonasi.add(donasi);
 
         System.out.println("\nDonasi berhasil dicatat!");
     }
 
     public static void tampilkanDonasi() {
-
         System.out.println("\n ^-^ ========== DATA DONASI ========== ^-^");
 
         if (daftarDonasi.isEmpty()) {
